@@ -5,6 +5,11 @@ function [Aieq, bieq] = getAbieq(n_seg, n_order, corridor_range, ts, v_max, a_ma
     % STEP 3.2.1 位置约束
 
     v = ones(n_all_poly,1);
+    for i = 0:n_seg - 1
+        v(i *(n_order + 1)+1:i *(n_order + 1)+n_order + 1) = v(i *(n_order + 1)+1:i *(n_order + 1)+n_order + 1) * ts(i+1);
+    end
+    
+    
     Aieq_p = diag(v);
     bieq_p = zeros(n_all_poly,1);
     for i = 0:n_seg - 1
@@ -41,7 +46,7 @@ function [Aieq, bieq] = getAbieq(n_seg, n_order, corridor_range, ts, v_max, a_ma
     Aieq_a = zeros((n_order - 1) * n_seg, n_all_poly);
     j = 1;
     for i = 1:(n_order - 1) * n_seg
-        Aieq_a(i,j:j+2) = n_order * (n_order - 1)*[1, -2, 1];
+        Aieq_a(i,j:j+2) = n_order * (n_order - 1)*[1, -2, 1]/ts(floor(j/(n_order + 1)) + 1);
         if mod(j + 2, n_order + 1) == 0
             j = j + 3;
         else
@@ -55,6 +60,4 @@ function [Aieq, bieq] = getAbieq(n_seg, n_order, corridor_range, ts, v_max, a_ma
     % combine all components to form Aieq and bieq   
     Aieq = [Aieq_p; Aieq_v; Aieq_a];
     bieq = [bieq_p; bieq_v; bieq_a];
-%     Aieq = Aieq_p;
-%     bieq = bieq_p;
 end

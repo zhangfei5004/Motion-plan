@@ -23,7 +23,7 @@ end
 %% 定义每一段的时间，这里简单的将每段的时间都设置为1
 ts = zeros(n_seg, 1);
 for i = 1:n_seg
-    ts(i,1) = 0.1;
+    ts(i,1) = 1;
 end
 % 获取x和y方向的多项式系数
 poly_coef_x = MinimumSnapCorridorBezierSolver(1, path(:, 1), corridor, ts, n_seg, n_order, v_max, a_max);
@@ -46,17 +46,17 @@ for k = 1:n_seg
         y_pos(idx) = 0.0;
         for i = 0:n_order
             basis_p = nchoosek(n_order, i) * t^i * (1-t)^(n_order-i);   % 此处的nchoosek对应于C_n_i
-             x_pos(idx) = x_pos(idx) + poly_coef_x((k-1)*(n_order + 1) + i + 1) * basis_p ;
-             y_pos(idx) = y_pos(idx) + poly_coef_y((k-1)*(n_order + 1) + i + 1) * basis_p ;
+             x_pos(idx) = x_pos(idx) + poly_coef_x((k-1)*(n_order + 1) + i + 1) * basis_p * ts(k) ;
+             y_pos(idx) = y_pos(idx) + poly_coef_y((k-1)*(n_order + 1) + i + 1) * basis_p * ts(k) ;
         end
         idx = idx + 1;
     end
 end
-scatter(poly_coef_x(1:8),poly_coef_y(1:8),100,"r");
-scatter(poly_coef_x(9:16),poly_coef_y(9:16),100,"g");
-scatter(poly_coef_x(17:24),poly_coef_y(17:24),100,"b");
-scatter(poly_coef_x(25:32),poly_coef_y(25:32),100,"c");
-scatter(poly_coef_x(33:40),poly_coef_y(33:40),100,"m");
+scatter(ts(1)*poly_coef_x(1:8),ts(1)*poly_coef_y(1:8),100,"r");
+scatter(ts(2)*poly_coef_x(9:16),ts(2)*poly_coef_y(9:16),100,"g");
+scatter(ts(3)*poly_coef_x(17:24),ts(3)*poly_coef_y(17:24),100,"b");
+scatter(ts(4)*poly_coef_x(25:32),ts(4)*poly_coef_y(25:32),100,"c");
+scatter(ts(5)*poly_coef_x(33:40),ts(5)*poly_coef_y(33:40),100,"m");
 plot(x_pos',y_pos',"Linewidth",2.0,"color","k");
 
 % 求解贝塞尔多项式系数

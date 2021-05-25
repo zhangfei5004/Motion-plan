@@ -22,13 +22,14 @@ for t=0.2:0.2:40
     for i = 1:20
         tref = t + i*0.2;
         r=0.25*tref;
-        pt(i,1) = r*sin(0.2*tref);
-        vt(i,1) = r*cos(0.2*tref);
-        at(i,1) = -r*sin(0.2*tref);
+        w = 0.7;
+        pt(i,1) = r*sin(w*tref);
+        vt(i,1) = r*cos(w*tref);
+        at(i,1) = -r*sin(w*tref);
         
-        pt(i,2) = r*cos(0.2*tref);
-        vt(i,2) = -r*sin(0.2*tref);
-        at(i,2) = -r*cos(0.2*tref);
+        pt(i,2) = r*cos(w*tref);
+        vt(i,2) = -r*sin(w*tref);
+        at(i,2) = -r*cos(w*tref);
         
         pt(i,3) = 20 - 0.5*tref;
         vt(i,3) = -0.5;

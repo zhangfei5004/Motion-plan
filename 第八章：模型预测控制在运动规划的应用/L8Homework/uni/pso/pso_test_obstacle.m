@@ -34,7 +34,7 @@ tgt_list=[];        % 目标列表
 a_list=[];          % 输入列表
 
 %% 开始仿真
-for n=1:450
+for n=1:700
     % 使用PSO算法选择最佳的线速度和角速度
     global_best = pso_select(theta,omega,v_c,[x y]',theta_target,v_target);
     theta_target = global_best(1);

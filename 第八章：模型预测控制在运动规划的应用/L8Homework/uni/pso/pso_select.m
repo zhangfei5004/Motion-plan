@@ -54,6 +54,7 @@ for j=1:batch
             P(i,1) = P(i,1) + P(i,3);
             P(i,4) = w * P(i,4)+ 0.2*(rand) * (P(i,6) - P(i,2)) + 0.2*(rand) * (global_best(2) - P(i,2));
             P(i,2) = P(i,2) + P(i,4);
+            P(i,1:2) = limitRange(P(i,1:2));
         end
         %evaluate the particles
         cost = evaluate(R,omega,p0,P(i,1),last_theta-theta,v_ini,P(i,2));

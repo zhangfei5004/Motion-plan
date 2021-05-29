@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2021-05-08 21:18:42
- * @LastEditTime: 2021-05-08 22:41:24
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /Motion-plan/第八章：模型预测控制在运动规划的应用/README.md
--->
 # 第八章作业
 
 本次的作业主要是利用模型预测控制(MPC)来完成路径规划
@@ -26,5 +18,5 @@
 
 ![](pictures/4.png)
 
-![](pictures/6.png)
+![](pictures/5.png)
 
